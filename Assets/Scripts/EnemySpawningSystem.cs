@@ -9,7 +9,7 @@ public class EnemySpawningSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        StartCoroutine(CoroutineUpdate(0));
     }
 
     // Update is called once per frame

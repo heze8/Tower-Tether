@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 89ffa9205630c9a40ad9b1503132d949, type: 3}
-  m_Name: BasicTower
+  m_Name: Level_1_Tower
   m_EditorClassIdentifier: 
-  name: Basic Tower
-  description: This is a basic tower.
-  artwork: {fileID: 0}
+  name: Level 1 Tower
+  description: This is a level 1 tower
+  artwork: {fileID: 21300000, guid: d74f93c6cc077064c8a4a85539ccc757, type: 3}
   cost: 1
-  level: 2
-  attack: 2
-  health: 2
+  level: 1
+  attack: 1
+  health: 1

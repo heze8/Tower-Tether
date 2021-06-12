@@ -16,8 +16,10 @@ public class EnemyBlob : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        navMeshAgent = GetComponent<NavMeshAgent>();
+        navMeshAgent = GetComponentInChildren<NavMeshAgent>();
         navMeshAgent.SetDestination(new Vector3());
+        navMeshAgent.updatePosition = false;
+        // navMeshAgent.updateUpAxis = true;
         var scale = (int) Math.Pow(2, level -1 );
         transform.localScale = Vector3.one * scale;
         hp *= scale;
@@ -27,19 +29,22 @@ public class EnemyBlob : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        transform.position = navMeshAgent.nextPosition;
     }
     
     private static EnemyBlob SpawnBlob(Vector3 transformPosition, int level)
     {
-        var blob = Instantiate(EnemySpawningSystem.Instance.gameObject, transformPosition, Quaternion.identity, parent: EnemySpawningSystem.Instance.transform);
-        return blob.GetComponent<EnemyBlob>();
+        var blob = Instantiate(EnemySpawningSystem.Instance.enemyPrefab, transformPosition, Quaternion.identity, parent: EnemySpawningSystem.Instance.transform);
+        var enemyBlob = blob.GetComponent<EnemyBlob>();
+        enemyBlob.level = level;
+        return enemyBlob;
     }
 
-    public void OnMyTriggerEnter(Collider other)
+
+    public void OnTriggerEnter(Collider other)
     {
         var enemyBlob = other.gameObject.GetComponentInParent<EnemyBlob>();
-        Debug.Log(other.gameObject);
+
         if (enemyBlob && !combined)
         {
             Debug.Log(enemyBlob);
@@ -55,6 +60,10 @@ public class EnemyBlob : MonoBehaviour
             }
                
         }
+    }
+
+    public void OnMyTriggerEnter(Collider other)
+    {
         
     }
 }

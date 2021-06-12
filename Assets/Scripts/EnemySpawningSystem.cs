@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.Build.Content;
 using UnityEngine;
 
-public class EnemySpawningSystem : MonoBehaviour
+public class EnemySpawningSystem : Singleton<EnemySpawningSystem>
 {
     public GameObject enemyPrefab;
     // Start is called before the first frame update
@@ -25,9 +25,4 @@ public class EnemySpawningSystem : MonoBehaviour
         Instantiate(enemyPrefab, position: enemyPos, Quaternion.identity, transform);
         StartCoroutine(CoroutineUpdate(Random.value * 10f));
     }
-}
-
-public class GameManager : Singleton<GameManager>
-{
-    public Vector2 mapSize = new Vector2(20, 20);
 }

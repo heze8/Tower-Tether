@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 
-namespace UnityTemplateProjects
-{
+
     public class SimpleCameraController : MonoBehaviour
     {
         public class CameraState
@@ -104,14 +103,14 @@ namespace UnityTemplateProjects
             {
                 direction += Vector3.right;
             }
-            if (Input.GetKey(KeyCode.Q))
-            {
-                direction += Vector3.down;
-            }
-            if (Input.GetKey(KeyCode.E))
-            {
-                direction += Vector3.up;
-            }
+            // if (Input.GetKey(KeyCode.Q))
+            // {
+            //     direction += Vector3.down;
+            // }
+            // if (Input.GetKey(KeyCode.E))
+            // {
+            //     direction += Vector3.up;
+            // }
             return direction;
         }
         
@@ -175,4 +174,3 @@ namespace UnityTemplateProjects
         }
     }
 
-}

@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89ffa9205630c9a40ad9b1503132d949, type: 3}
   m_Name: Level_2_Tower
   m_EditorClassIdentifier: 
-  name: Basic Tower
-  description: This is a basic tower.
-  artwork: {fileID: 0}
-  cost: 1
+  name: Level 2 Tower
+  description: This is a level 2 tower
+  artwork: {fileID: 21300000, guid: d74f93c6cc077064c8a4a85539ccc757, type: 3}
+  cost: 2
   level: 2
-  attack: 2
-  health: 2
+  attack: 3
+  health: 3

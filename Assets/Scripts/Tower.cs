@@ -22,7 +22,7 @@ public class Tower : Tile, IObstacle
     public string cardName;
     public int cost;
     public int range;
-    public void Start()
+    public virtual void Start()
     {
         GridManager.Instance.StartCoroutine(CoroutineUpdate(0));
         levelText = Instantiate(levelText, pos, Quaternion.identity);
@@ -30,7 +30,8 @@ public class Tower : Tile, IObstacle
         
     }
     
-    IEnumerator CoroutineUpdate(float time)
+    [HideInInspector]
+    public virtual IEnumerator CoroutineUpdate(float time)
     {
         yield return new WaitForSeconds(time);
 

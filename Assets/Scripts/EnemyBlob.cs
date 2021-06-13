@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class EnemyBlob : MonoBehaviour
 {
@@ -121,6 +122,10 @@ public class EnemyBlob : MonoBehaviour
     IEnumerator CoroutineUpdate(DestroyableObject destroyableObject, float time)
     {
          destroyableObject.myHp -= dmg;
+         if (@base.myHp <= 0)
+         {
+             SceneManager.LoadScene(2);
+         }
          destroyableObject.hp.SetHealth(destroyableObject.myHp);
          if (!destroyableObject)
          {

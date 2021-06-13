@@ -36,15 +36,10 @@ public class Tower : Tile, IObstacle
         GridManager.Instance.StartCoroutine(CoroutineUpdate(attackInterval));
     }
 
-    private void Attack(EnemyBlob blob)
+    public virtual void Attack(EnemyBlob blob)
     {
         var effect =Instantiate(attackEffect, position: pos, Quaternion.identity);
         effect.GetComponent<LineRenderer>().SetPositions(new Vector3[]{pos, blob.transform.position});
         blob.hp -= dmg;
     }
-}
-[CreateAssetMenu]
-public class IceTower : Tower
-{
-    
 }

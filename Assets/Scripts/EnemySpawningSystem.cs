@@ -31,8 +31,10 @@ public class EnemySpawningSystem : Singleton<EnemySpawningSystem>
         Vector3 enemyPos =  insideUnitCircle* GameManager.Instance.mapSize.x ;
         Debug.Log(enemyPos);
         yield return new WaitForSeconds(time/ difficulty);
-        EnemyBlob.SpawnBlob( enemyPos, Mathf.RoundToInt(difficulty));
+        EnemyBlob.SpawnBlob( enemyPos, Mathf.RoundToInt(difficulty), hp: 10 +Mathf.RoundToInt(difficulty));
         StartCoroutine(CoroutineUpdate(Random.value * 10f));
+        difficulty += 0.05f;
+
     }
 
     public EnemyBlob GetNearestEnemy(Vector2 pos)

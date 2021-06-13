@@ -44,7 +44,7 @@ public class EnemyBlob : MonoBehaviour
     public void CheckRoute()
     {
         navMeshAgent.CalculatePath(Vector3.zero, _navMeshPath);
-        Debug.Log(_navMeshPath.status == NavMeshPathStatus.PathInvalid);
+        navMeshAgent.SetPath(_navMeshPath);
         for (int i = 0; i < _navMeshPath.corners.Length - 1; i++)
             Debug.DrawLine(_navMeshPath.corners[i], _navMeshPath.corners[i + 1], Color.red);
     }
@@ -81,13 +81,13 @@ public class EnemyBlob : MonoBehaviour
         }
     }
 
-    public static EnemyBlob SpawnBlob(Vector3 transformPosition, int level)
+    public static EnemyBlob SpawnBlob(Vector3 transformPosition, int level, int hp = 10)
     {
         var blob = Instantiate(EnemySpawningSystem.Instance.enemyPrefab, transformPosition, Quaternion.identity, parent: EnemySpawningSystem.Instance.transform);
         var enemyBlob = blob.GetComponent<EnemyBlob>();
         enemyBlob.level = level;
         enemyBlob.combined = false;
-
+        enemyBlob.hp = hp;
         return enemyBlob;
     }
 
@@ -112,17 +112,21 @@ public class EnemyBlob : MonoBehaviour
     }
     
 
-    public void SetAttackingBase(Base @base)
+    public void SetAttackingBase(DestroyableObject destroyableObject)
     {
         notAttackingBase = false;
         navMeshAgent.speed = 0;
-        StartCoroutine(CoroutineUpdate(@base, 0));
+        StartCoroutine(CoroutineUpdate(destroyableObject, 0));
     }
-    IEnumerator CoroutineUpdate(Base @base, float time)
+    IEnumerator CoroutineUpdate(DestroyableObject destroyableObject, float time)
     {
-         @base.myHp -= dmg;
-         @base.hp.SetHealth(@base.myHp);
+         destroyableObject.myHp -= dmg;
+         destroyableObject.hp.SetHealth(destroyableObject.myHp);
+         if (!destroyableObject)
+         {
+             navMeshAgent.speed = 3.5f;
+         }
         yield return new WaitForSeconds(time);
-        StartCoroutine(CoroutineUpdate(@base, GameManager.Instance.blobAttackRate));
+        StartCoroutine(CoroutineUpdate(destroyableObject, GameManager.Instance.blobAttackRate));
     }
 }

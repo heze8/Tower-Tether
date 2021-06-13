@@ -9,8 +9,9 @@ public class EnemyBlob : MonoBehaviour
     private NavMeshAgent navMeshAgent;
 
     public int hp;
-
+    public int startingHp;
     public int level;
+    public healthBar healthBar;
     private Rigidbody rb;
 
     private bool combined = true;
@@ -27,6 +28,7 @@ public class EnemyBlob : MonoBehaviour
         EnemySpawningSystem.Instance.blobsSpawned.Add(this);
         transform.localScale = Vector3.one * scale;
         hp *= scale;
+        startingHp = hp;
     }
 
     // Update is called once per frame
@@ -43,6 +45,13 @@ public class EnemyBlob : MonoBehaviour
 
             }
     
+        }
+
+        if (hp < startingHp)
+        {
+            healthBar.gameObject.SetActive(true);
+            healthBar.SetMaxHealth(startingHp);
+            healthBar.SetHealth(hp);
         }
     }
 

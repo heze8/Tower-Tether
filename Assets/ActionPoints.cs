@@ -6,7 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ActionPoint : MonoBehaviour
+public class ActionPoints : Singleton<ActionPoints>
 {
     private int _points = 0;
     public int startingPoints;

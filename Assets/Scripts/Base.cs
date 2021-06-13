@@ -5,25 +5,23 @@ using UnityEngine;
 
 public class Base : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public healthBar hp;
+    public int myHp;
+    public void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        myHp = GameManager.Instance.baseHp;
+        hp.SetMaxHealth(myHp);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("BaseAttack");
+        var enemyBlob = other.GetComponent<EnemyBlob>();
+        if (enemyBlob)
+        {
+            myHp -= enemyBlob.dmg;
+            hp.SetHealth(myHp);
+        }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        Debug.Log("BaseAttack");
-    }
+
 }

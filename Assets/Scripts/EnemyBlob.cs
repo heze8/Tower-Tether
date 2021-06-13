@@ -9,12 +9,16 @@ public class EnemyBlob : MonoBehaviour
     private NavMeshAgent navMeshAgent;
 
     public int hp;
+    [HideInInspector]
     public int startingHp;
     public int level;
     public healthBar healthBar;
     private Rigidbody rb;
 
     private bool combined = true;
+
+    public int dmg = 1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +32,7 @@ public class EnemyBlob : MonoBehaviour
         EnemySpawningSystem.Instance.blobsSpawned.Add(this);
         transform.localScale = Vector3.one * scale;
         hp *= scale;
+        dmg *= scale;
         startingHp = hp;
     }
 
@@ -63,7 +68,7 @@ public class EnemyBlob : MonoBehaviour
         }
     }
 
-    private static EnemyBlob SpawnBlob(Vector3 transformPosition, int level)
+    public static EnemyBlob SpawnBlob(Vector3 transformPosition, int level)
     {
         var blob = Instantiate(EnemySpawningSystem.Instance.enemyPrefab, transformPosition, Quaternion.identity, parent: EnemySpawningSystem.Instance.transform);
         var enemyBlob = blob.GetComponent<EnemyBlob>();
@@ -76,8 +81,9 @@ public class EnemyBlob : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        var enemyBlob = other.gameObject.GetComponentInParent<EnemyBlob>();
 
+        var enemyBlob = other.gameObject.GetComponentInParent<EnemyBlob>();
+        Debug.Log(combined);
         if (enemyBlob && !combined)
         {
             if (enemyBlob.level == level)

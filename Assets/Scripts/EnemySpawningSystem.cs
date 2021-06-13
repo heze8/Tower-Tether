@@ -31,7 +31,7 @@ public class EnemySpawningSystem : Singleton<EnemySpawningSystem>
         Vector3 enemyPos =  insideUnitCircle* GameManager.Instance.mapSize.x ;
         Debug.Log(enemyPos);
         yield return new WaitForSeconds(time/ difficulty);
-        Instantiate(enemyPrefab, position: enemyPos, Quaternion.identity, transform);
+        EnemyBlob.SpawnBlob( enemyPos, Mathf.RoundToInt(difficulty));
         StartCoroutine(CoroutineUpdate(Random.value * 10f));
     }
 

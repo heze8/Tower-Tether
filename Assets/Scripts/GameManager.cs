@@ -7,6 +7,7 @@ public class GameManager : Singleton<GameManager>
     public int startingActionPoints = 3;
     public ActionPoints actionPoints;
     public int baseHp = 70;
+    public float blobAttackRate = 0.4f;
 
     private void Start()
     {

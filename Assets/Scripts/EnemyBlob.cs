@@ -18,10 +18,12 @@ public class EnemyBlob : MonoBehaviour
     private bool combined = true;
 
     public int dmg = 1;
+    public bool notAttackingBase;
 
     // Start is called before the first frame update
     void Start()
     {
+        notAttackingBase = true;
         navMeshAgent = GetComponentInChildren<NavMeshAgent>();
         navMeshAgent.SetDestination(new Vector3());
         navMeshAgent.updatePosition = false;
@@ -83,7 +85,6 @@ public class EnemyBlob : MonoBehaviour
     {
 
         var enemyBlob = other.gameObject.GetComponentInParent<EnemyBlob>();
-        Debug.Log(combined);
         if (enemyBlob && !combined)
         {
             if (enemyBlob.level == level)
@@ -102,5 +103,18 @@ public class EnemyBlob : MonoBehaviour
     public void OnMyTriggerEnter(Collider other)
     {
         
+    }
+
+    public void SetAttackingBase(Base @base)
+    {
+        notAttackingBase = false;
+        StartCoroutine(CoroutineUpdate(@base, 0));
+    }
+    IEnumerator CoroutineUpdate(Base @base, float time)
+    {
+         @base.myHp -= dmg;
+         @base.hp.SetHealth(@base.myHp);
+        yield return new WaitForSeconds(time);
+        StartCoroutine(CoroutineUpdate(@base, GameManager.Instance.blobAttackRate));
     }
 }

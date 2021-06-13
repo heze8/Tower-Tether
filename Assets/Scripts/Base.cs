@@ -16,12 +16,11 @@ public class Base : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         var enemyBlob = other.GetComponent<EnemyBlob>();
-        if (enemyBlob)
+        if (enemyBlob && enemyBlob.notAttackingBase)
         {
-            myHp -= enemyBlob.dmg;
-            hp.SetHealth(myHp);
+            enemyBlob.SetAttackingBase(this);
+          
         }
     }
-
 
 }

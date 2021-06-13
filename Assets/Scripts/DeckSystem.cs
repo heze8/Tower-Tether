@@ -46,6 +46,17 @@ public class DeckSystem : Singleton<DeckSystem>
 
     private void DrawCardFromDeck()
     {
+        if (deck.Count == 0) return;
+
+        if (GameManager.Instance.actionPoints.points <= 0)
+        {
+            return;
+        }
+        else
+        {
+            GameManager.Instance.actionPoints.points -= 1;
+        }
+
         GameObject playerCard = Instantiate(CardPrefab, Hand.transform, false);
         var cardDisplay = playerCard.GetComponent<CardDisplay>();
         var card = Random.Range(0, deck.Count);

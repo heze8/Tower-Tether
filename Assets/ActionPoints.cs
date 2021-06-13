@@ -4,39 +4,18 @@ using System.Collections.Generic;
 using System.Web;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class ActionPoints : Singleton<ActionPoints>
 {
-    private int _points = 0;
-    public int startingPoints;
+    [FormerlySerializedAs("_points")] public int points = 0;
     public TextMeshProUGUI pointsText;
 
-    private void Start()
-    {
-        setActionPoints(startingPoints);
-    }
+    
 
-    public void setActionPoints(int points)
+    private void Update()
     {
-        this._points = points;
-        updateText();
-    }
-
-    public void addPoint()
-    {
-        this._points += 1;
-        updateText();
-    }
-
-    public void removePoint()
-    {
-        this._points -= 1;
-        updateText();
-    }
-
-    private void updateText()
-    {
-        pointsText.text = this._points.ToString();
+        pointsText.text = this.points.ToString();
     }
 }

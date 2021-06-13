@@ -9,6 +9,6 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
-        actionPoints.startingPoints = startingActionPoints;
+        actionPoints.points = startingActionPoints;
     }
 }

@@ -27,6 +27,7 @@ public class EnemySpawningSystem : Singleton<EnemySpawningSystem>
     IEnumerator CoroutineUpdate(float time)
     {
         Vector3 enemyPos = Random.insideUnitCircle * GameManager.Instance.mapSize.x;
+        Debug.Log(enemyPos);
         yield return new WaitForSeconds(time/ difficulty);
         Instantiate(enemyPrefab, position: enemyPos, Quaternion.identity, transform);
         StartCoroutine(CoroutineUpdate(Random.value * 10f));

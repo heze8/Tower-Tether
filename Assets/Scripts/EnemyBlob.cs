@@ -35,7 +35,6 @@ public class EnemyBlob : MonoBehaviour
         rb.MovePosition(navMeshAgent.nextPosition);
         if (hp < 0)
         {
-            Debug.Log("ded");
             Destroy(gameObject);
             if (level > 1)
             {

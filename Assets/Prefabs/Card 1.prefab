@@ -53,7 +53,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bd35709498d938488159cbc87af5316, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerCard: {fileID: 11400000, guid: 0b37f50f4c541864e9ff3ccc606d0166, type: 2}
+  tower: {fileID: 11400000, guid: 45d7d65860a2d0b43a9ecbae5ed6481d, type: 2}
   nameText: {fileID: 7910293207478152991}
   descriptionText: {fileID: 7910293206404032863}
   cost: {fileID: 7910293207317338391}
@@ -164,7 +164,7 @@ SortingGroup:
   m_GameObject: {fileID: 7910293206404032861}
   m_Enabled: 1
   m_SortingLayerID: -755761633
-  m_SortingLayer: -2
+  m_SortingLayer: 1
   m_SortingOrder: 100
 --- !u!1 &7910293207317338389
 GameObject:
@@ -273,7 +273,7 @@ SortingGroup:
   m_GameObject: {fileID: 7910293207317338389}
   m_Enabled: 1
   m_SortingLayerID: -755761633
-  m_SortingLayer: -2
+  m_SortingLayer: 1
   m_SortingOrder: 100
 --- !u!1 &7910293207344342250
 GameObject:
@@ -351,7 +351,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -755761633
-  m_SortingLayer: -2
+  m_SortingLayer: 1
   m_SortingOrder: -2
   m_Sprite: {fileID: 21300000, guid: 264986350d9d6b74b9b3c2987b45c1c7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -457,7 +457,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -755761633
-  m_SortingLayer: -2
+  m_SortingLayer: 1
   m_SortingOrder: 200
   m_Sprite: {fileID: 21300000, guid: d74f93c6cc077064c8a4a85539ccc757, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

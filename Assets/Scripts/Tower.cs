@@ -15,7 +15,10 @@ public class Tower : Tile, IObstacle
     // Tower properties
     public int dmg;
     public int health;
-
+    public string description;
+    public string cardName;
+    public int cost;
+    public int range;
     public void Start()
     {
         GridManager.Instance.StartCoroutine(CoroutineUpdate(0));
@@ -39,4 +42,9 @@ public class Tower : Tile, IObstacle
         effect.GetComponent<LineRenderer>().SetPositions(new Vector3[]{pos, blob.transform.position});
         blob.hp -= dmg;
     }
+}
+[CreateAssetMenu]
+public class IceTower : Tower
+{
+    
 }

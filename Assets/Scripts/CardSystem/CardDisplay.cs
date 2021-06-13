@@ -24,6 +24,8 @@ public class CardDisplay : MonoBehaviour
 
     public void UseCard()
     {
+        if (GameManager.Instance.actionPoints.points < tower.cost) return;
+        GameManager.Instance.actionPoints.points -= tower.cost;
         DeckSystem.Instance.UseCard(this);
     }
 

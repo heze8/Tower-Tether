@@ -10,7 +10,6 @@ public class DestroyableObject : MonoBehaviour
     public virtual void Start()
     {
         startingHp = myHp;
-        StartCoroutine(CoroutineUpdate(GameManager.Instance.baseAPRate));
     }
     
     public void SetHP(int hp)
@@ -42,12 +41,7 @@ public class DestroyableObject : MonoBehaviour
           
         }
     }
-    public IEnumerator CoroutineUpdate(float time)
-    {
-        GameManager.Instance.actionPoints.points++;
-        yield return new WaitForSeconds(time );
-        StartCoroutine(CoroutineUpdate(time));
-    }
+  
     
     
 }

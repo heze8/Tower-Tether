@@ -14,8 +14,9 @@ public class ResourceTower : Tower
     }
     public override IEnumerator CoroutineUpdate(float time)
     {
-        yield return new WaitForSeconds(time);
+        Debug.Log("reousurce");
 
+        yield return new WaitForSeconds(time);
         GenerateResource(); 
         
         GridManager.Instance.StartCoroutine(CoroutineUpdate(resourceFreq));

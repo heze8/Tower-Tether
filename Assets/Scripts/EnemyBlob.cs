@@ -122,10 +122,7 @@ public class EnemyBlob : MonoBehaviour
     IEnumerator CoroutineUpdate(DestroyableObject destroyableObject, float time)
     {
          destroyableObject.myHp -= dmg;
-         if (@base.myHp <= 0)
-         {
-             SceneManager.LoadScene(2);
-         }
+
          destroyableObject.hp.SetHealth(destroyableObject.myHp);
          if (!destroyableObject)
          {

@@ -10,7 +10,6 @@ public class GridManager : Singleton<GridManager>
     private Tilemap _tileMap;
 
     public Wall _wall;
-    public List<Tower> _Towers;
 
     public List<Tower> towers;
     public NavMeshAgent agent;
@@ -90,7 +89,7 @@ public class GridManager : Singleton<GridManager>
                 {
                     break;
                 }
-                _tileMap.SetTile(new Vector3Int(end.x, end.y,0), _wall);
+                _tileMap.SetTile(new Vector3Int(end.x, end.y,0), Instantiate(_wall));
 
             }
             if (closestT.level == tower.level)

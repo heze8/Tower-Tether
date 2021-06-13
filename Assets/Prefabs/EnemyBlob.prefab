@@ -142,7 +142,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 393438163
-  m_SortingLayer: -2
+  m_SortingLayer: -3
   m_SortingOrder: 1798
   m_Sprite: {fileID: 21300000, guid: 41b5c63a92a368b43ab83f7c2bffe5d9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -253,7 +253,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 393438163
+  m_SortingLayerID: 2108092737
   m_SortingOrder: 11
   m_TargetDisplay: 0
 --- !u!114 &1439977904
@@ -531,6 +531,14 @@ PrefabInstance:
     - target: {fileID: 13401678284082793, guid: 2636e264985c158458aef6f991036190, type: 3}
       propertyPath: m_Name
       value: HealthBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 3525727175360509345, guid: 2636e264985c158458aef6f991036190, type: 3}
+      propertyPath: m_SortingLayer
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3525727175360509345, guid: 2636e264985c158458aef6f991036190, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2108092737
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2636e264985c158458aef6f991036190, type: 3}

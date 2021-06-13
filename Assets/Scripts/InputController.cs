@@ -41,8 +41,11 @@ public class InputController : MonoBehaviour
          // get the collision point of the ray with the z = 0 plane
             worldPoint = ray.GetPoint(-ray.origin.z / ray.direction.z);
 
-            GridManager.Instance.SetBuilding(worldPoint, DeckSystem.Instance.currentTower);
-            DeckSystem.Instance.PlacedTower();
+            if (GridManager.Instance.WithinRange(worldPoint))
+            {
+                GridManager.Instance.SetBuilding(worldPoint, DeckSystem.Instance.currentTower);
+                DeckSystem.Instance.PlacedTower();
+            }
 
         }
     }

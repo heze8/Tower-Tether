@@ -11,6 +11,7 @@ public class Base : MonoBehaviour
     {
         myHp = GameManager.Instance.baseHp;
         hp.SetMaxHealth(myHp);
+        StartCoroutine(CoroutineUpdate(GameManager.Instance.baseAPRate));
     }
 
     private void OnTriggerEnter(Collider other)
@@ -21,6 +22,12 @@ public class Base : MonoBehaviour
             enemyBlob.SetAttackingBase(this);
           
         }
+    }
+    IEnumerator CoroutineUpdate(float time)
+    {
+        GameManager.Instance.actionPoints.points++;
+        yield return new WaitForSeconds(time );
+        StartCoroutine(CoroutineUpdate(time));
     }
 
 }

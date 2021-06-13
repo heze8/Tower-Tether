@@ -13,6 +13,6 @@ public class CollisionTrigger : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        _blob.OnMyTriggerEnter(other);
+        // _blob.OnMyTriggerEnter(other);
     }
 }

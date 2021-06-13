@@ -39,6 +39,7 @@ MonoBehaviour:
   attackInterval: 0.5
   level: 1
   attackEffect: {fileID: 3519457865320196500, guid: 20a66412dc419754482a86d06df451d0, type: 3}
+  levelText: {fileID: 2721759752149794238, guid: e8692352ee9351e4ab80f6659da11d5e, type: 3}
   dmg: 1
   health: 8
   description: Slows enemy, but has low damage

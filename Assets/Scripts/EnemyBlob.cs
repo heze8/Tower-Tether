@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class EnemyBlob : MonoBehaviour
 {
@@ -113,7 +114,11 @@ public class EnemyBlob : MonoBehaviour
     IEnumerator CoroutineUpdate(Base @base, float time)
     {
          @base.myHp -= dmg;
-         @base.hp.SetHealth(@base.myHp);
+         if (@base.myHp <= 0)
+         {
+             SceneManager.LoadScene(2);
+         }
+             @base.hp.SetHealth(@base.myHp);
         yield return new WaitForSeconds(time);
         StartCoroutine(CoroutineUpdate(@base, GameManager.Instance.blobAttackRate));
     }

@@ -9,7 +9,7 @@ using Random = UnityEngine.Random;
 public class EnemySpawningSystem : Singleton<EnemySpawningSystem>
 {
     public GameObject enemyPrefab;
-
+    public float difficulty = 1;
     public HashSet<EnemyBlob> blobsSpawned;
     // Start is called before the first frame update
     void Start()
@@ -27,7 +27,7 @@ public class EnemySpawningSystem : Singleton<EnemySpawningSystem>
     IEnumerator CoroutineUpdate(float time)
     {
         Vector3 enemyPos = Random.insideUnitCircle * GameManager.Instance.mapSize.x;
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSeconds(time/ difficulty);
         Instantiate(enemyPrefab, position: enemyPos, Quaternion.identity, transform);
         StartCoroutine(CoroutineUpdate(Random.value * 10f));
     }

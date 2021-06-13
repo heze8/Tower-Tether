@@ -22,7 +22,6 @@ public class DeckSystem : Singleton<DeckSystem>
     public void onClick()
     {
         DrawCardFromDeck();
-       
     }
 
     public void Update()

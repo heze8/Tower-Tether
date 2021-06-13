@@ -21,9 +21,12 @@ public class EnemyBlob : MonoBehaviour
     public int dmg = 1;
     public bool notAttackingBase;
 
+    private NavMeshPath _navMeshPath;
     // Start is called before the first frame update
     void Start()
     {
+        _navMeshPath = new NavMeshPath();
+
         notAttackingBase = true;
         navMeshAgent = GetComponentInChildren<NavMeshAgent>();
         navMeshAgent.SetDestination(new Vector3());
@@ -31,7 +34,7 @@ public class EnemyBlob : MonoBehaviour
         navMeshAgent.updateUpAxis = true;
         rb = GetComponent<Rigidbody>();
         var scale = (int) Math.Pow(2, level -1 );
-
+        CheckRoute();
         EnemySpawningSystem.Instance.blobsSpawned.Add(this);
         transform.localScale = Vector3.one * scale;
         hp *= scale;
@@ -39,6 +42,14 @@ public class EnemyBlob : MonoBehaviour
         startingHp = hp;
     }
 
+    public void CheckRoute()
+    {
+        navMeshAgent.CalculatePath(Vector3.zero, _navMeshPath);
+        navMeshAgent.SetPath(_navMeshPath);
+        for (int i = 0; i < _navMeshPath.corners.Length - 1; i++)
+            Debug.DrawLine(_navMeshPath.corners[i], _navMeshPath.corners[i + 1], Color.red);
+    }
+  
     // Update is called once per frame
     void Update()
     {
@@ -71,13 +82,13 @@ public class EnemyBlob : MonoBehaviour
         }
     }
 
-    public static EnemyBlob SpawnBlob(Vector3 transformPosition, int level)
+    public static EnemyBlob SpawnBlob(Vector3 transformPosition, int level, int hp = 10)
     {
         var blob = Instantiate(EnemySpawningSystem.Instance.enemyPrefab, transformPosition, Quaternion.identity, parent: EnemySpawningSystem.Instance.transform);
         var enemyBlob = blob.GetComponent<EnemyBlob>();
         enemyBlob.level = level;
         enemyBlob.combined = false;
-
+        enemyBlob.hp = hp;
         return enemyBlob;
     }
 
@@ -100,26 +111,27 @@ public class EnemyBlob : MonoBehaviour
                
         }
     }
+    
 
-    public void OnMyTriggerEnter(Collider other)
-    {
-        
-    }
-
-    public void SetAttackingBase(Base @base)
+    public void SetAttackingBase(DestroyableObject destroyableObject)
     {
         notAttackingBase = false;
-        StartCoroutine(CoroutineUpdate(@base, 0));
+        navMeshAgent.speed = 0;
+        StartCoroutine(CoroutineUpdate(destroyableObject, 0));
     }
-    IEnumerator CoroutineUpdate(Base @base, float time)
+    IEnumerator CoroutineUpdate(DestroyableObject destroyableObject, float time)
     {
-         @base.myHp -= dmg;
+         destroyableObject.myHp -= dmg;
          if (@base.myHp <= 0)
          {
              SceneManager.LoadScene(2);
          }
-             @base.hp.SetHealth(@base.myHp);
+         destroyableObject.hp.SetHealth(destroyableObject.myHp);
+         if (!destroyableObject)
+         {
+             navMeshAgent.speed = 3.5f;
+         }
         yield return new WaitForSeconds(time);
-        StartCoroutine(CoroutineUpdate(@base, GameManager.Instance.blobAttackRate));
+        StartCoroutine(CoroutineUpdate(destroyableObject, GameManager.Instance.blobAttackRate));
     }
 }

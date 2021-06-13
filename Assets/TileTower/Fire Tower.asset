@@ -39,6 +39,7 @@ MonoBehaviour:
   attackInterval: 0.3
   level: 1
   attackEffect: {fileID: 6259000823345410518, guid: e480c8c6626da4d4d9f625bf45e676aa, type: 3}
+  levelText: {fileID: 2721759752149794238, guid: e8692352ee9351e4ab80f6659da11d5e, type: 3}
   dmg: 2
   health: 10
   description: Fast fire attacks with short range

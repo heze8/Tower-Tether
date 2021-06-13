@@ -20,9 +20,12 @@ public class EnemyBlob : MonoBehaviour
     public int dmg = 1;
     public bool notAttackingBase;
 
+    private NavMeshPath _navMeshPath;
     // Start is called before the first frame update
     void Start()
     {
+        _navMeshPath = new NavMeshPath();
+
         notAttackingBase = true;
         navMeshAgent = GetComponentInChildren<NavMeshAgent>();
         navMeshAgent.SetDestination(new Vector3());
@@ -30,7 +33,7 @@ public class EnemyBlob : MonoBehaviour
         navMeshAgent.updateUpAxis = true;
         rb = GetComponent<Rigidbody>();
         var scale = (int) Math.Pow(2, level -1 );
-
+        CheckRoute();
         EnemySpawningSystem.Instance.blobsSpawned.Add(this);
         transform.localScale = Vector3.one * scale;
         hp *= scale;
@@ -38,6 +41,14 @@ public class EnemyBlob : MonoBehaviour
         startingHp = hp;
     }
 
+    public void CheckRoute()
+    {
+        navMeshAgent.CalculatePath(Vector3.zero, _navMeshPath);
+        Debug.Log(_navMeshPath.status == NavMeshPathStatus.PathInvalid);
+        for (int i = 0; i < _navMeshPath.corners.Length - 1; i++)
+            Debug.DrawLine(_navMeshPath.corners[i], _navMeshPath.corners[i + 1], Color.red);
+    }
+  
     // Update is called once per frame
     void Update()
     {
@@ -99,15 +110,12 @@ public class EnemyBlob : MonoBehaviour
                
         }
     }
-
-    public void OnMyTriggerEnter(Collider other)
-    {
-        
-    }
+    
 
     public void SetAttackingBase(Base @base)
     {
         notAttackingBase = false;
+        navMeshAgent.speed = 0;
         StartCoroutine(CoroutineUpdate(@base, 0));
     }
     IEnumerator CoroutineUpdate(Base @base, float time)

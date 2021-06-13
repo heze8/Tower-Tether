@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Tilemaps;
 
 public class GridManager : Singleton<GridManager>
@@ -12,6 +13,7 @@ public class GridManager : Singleton<GridManager>
     public List<Tower> _Towers;
 
     public List<Tower> towers;
+    public NavMeshAgent agent;
     
     // Start is called before the first frame update
     void Start()
@@ -20,6 +22,21 @@ public class GridManager : Singleton<GridManager>
         towers = new List<Tower>();
     }
 
+    public bool WithinRange(Vector2 pos)
+    {
+        var range = GameManager.Instance.mapSize;
+            
+        if (!(pos.x > range.x || pos.x < -range.x))
+        {
+            return true;
+        }
+                
+        if (!(pos.y > range.y || pos.y < -range.y))
+        {
+            return true;
+        }
+        return false;
+    }
     public void SetBuilding(Vector3 coordinate, Tower tile)
     {
         var cellPos = _tileMap.WorldToCell(coordinate);
@@ -66,6 +83,9 @@ public class GridManager : Singleton<GridManager>
                 i++;
                 var route = direction * i;
                 var end = v + new Vector2Int(Mathf.RoundToInt(route.x), Mathf.RoundToInt(route.y));
+                
+                
+                
                 if (end == destination)
                 {
                     break;
@@ -73,8 +93,17 @@ public class GridManager : Singleton<GridManager>
                 _tileMap.SetTile(new Vector3Int(end.x, end.y,0), _wall);
 
             }
+            if (closestT.level == tower.level)
+            {
+                closestT.LevelUp();
+                Debug.Log(closestT.level);
+
+                tower.LevelUp();
+            }
             
         }
+
+        EnemySpawningSystem.Instance.CheckRoutes();
         towers.Add(tower);
         tower.Start();
 

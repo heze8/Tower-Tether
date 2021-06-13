@@ -51,4 +51,12 @@ public class EnemySpawningSystem : Singleton<EnemySpawningSystem>
 
         return closest;
     }
+
+    public void CheckRoutes()
+    {
+        foreach (var blob in blobsSpawned)
+        {
+            blob.CheckRoute();
+        }
+    }
 }

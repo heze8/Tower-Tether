@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -12,6 +13,8 @@ public class Tower : Tile, IObstacle
     public int level;
 
     public GameObject attackEffect;
+
+    public GameObject levelText;
     // Tower properties
     public int dmg;
     public int health;
@@ -22,6 +25,9 @@ public class Tower : Tile, IObstacle
     public virtual void Start()
     {
         GridManager.Instance.StartCoroutine(CoroutineUpdate(0));
+        levelText = Instantiate(levelText, pos, Quaternion.identity);
+        levelText.GetComponentInChildren<TextMeshProUGUI>().text = level.ToString();
+        
     }
     
     [HideInInspector]
@@ -36,6 +42,14 @@ public class Tower : Tile, IObstacle
                 Attack(blob);
         }
         GridManager.Instance.StartCoroutine(CoroutineUpdate(attackInterval));
+    }
+
+    public void LevelUp()
+    {
+        level++;
+        dmg += dmg;
+        range += 3; 
+        levelText.GetComponentInChildren<TextMeshProUGUI>().text = level.ToString();
     }
 
     public virtual void Attack(EnemyBlob blob)

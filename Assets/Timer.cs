@@ -18,6 +18,7 @@ public class Timer : MonoBehaviour
     void Update()
     {
         timeElapsed += Time.deltaTime;
+        ScoreTracker.setTime(timeElapsed);
         DisplayTime();
     }
 

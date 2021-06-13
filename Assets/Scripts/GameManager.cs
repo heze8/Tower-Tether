@@ -11,6 +11,7 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
+        ScoreTracker.setTime(0f);
         actionPoints.points = startingActionPoints;
     }
 }

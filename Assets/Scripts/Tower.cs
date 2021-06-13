@@ -31,7 +31,8 @@ public class Tower : Tile, IObstacle
         EnemyBlob blob = EnemySpawningSystem.Instance.GetNearestEnemy(pos);
         if (blob)
         {
-            Attack(blob);
+            if(((Vector2)blob.transform.position - pos).magnitude < range)
+                Attack(blob);
         }
         GridManager.Instance.StartCoroutine(CoroutineUpdate(attackInterval));
     }
@@ -42,4 +43,6 @@ public class Tower : Tile, IObstacle
         effect.GetComponent<LineRenderer>().SetPositions(new Vector3[]{pos, blob.transform.position});
         blob.hp -= dmg;
     }
+
+    
 }

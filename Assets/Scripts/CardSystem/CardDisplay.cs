@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,11 +12,32 @@ public class CardDisplay : MonoBehaviour
     public Text descriptionText;
     public Text cost;
     public SpriteRenderer sprite;
+    private bool follow;
+
     void Start()
     {
         sprite.sprite = tower.sprite;
         nameText.text = tower.cardName;
-        descriptionText.text = tower.description;
+        descriptionText.text = "Level: " + tower.level + "\n" + tower.description;
         cost.text = tower.cost.ToString();
+    }
+
+    public void UseCard()
+    {
+        DeckSystem.Instance.UseCard(this);
+    }
+
+    public void Update()
+    {
+        if (follow)
+        {
+            transform.position = Input.mousePosition;
+        }
+    }
+
+    public void FollowMousePosition()
+    {
+        transform.SetParent(null);
+        follow = true;
     }
 }

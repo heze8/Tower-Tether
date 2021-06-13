@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public class DeckSystem : MonoBehaviour
+public class DeckSystem : Singleton<DeckSystem>
 {
     public GameObject CardPrefab;
     public GameObject Hand;
@@ -15,8 +15,10 @@ public class DeckSystem : MonoBehaviour
     [HideInInspector]
     public List<Tower> deck;
     [HideInInspector]
-    public List<Tower> hand;
+    public List<CardDisplay> hand;
 
+    public Tower currentTower;
+    private GameObject cardDisplayObj;
     public void onClick()
     {
         DrawCardFromDeck();
@@ -26,12 +28,13 @@ public class DeckSystem : MonoBehaviour
     public void Update()
     {
         deckSize.text = deck.Count.ToString();
+        
     }
 
     public void Start()
     {
         deck = new List<Tower>();
-        hand = new List<Tower>();
+        hand = new List<CardDisplay>();
         foreach (var towerCount in defineDeck)
         {
             for (int i = 0; i < towerCount.y; i++)
@@ -47,7 +50,25 @@ public class DeckSystem : MonoBehaviour
         var cardDisplay = playerCard.GetComponent<CardDisplay>();
         var card = Random.Range(0, deck.Count);
         cardDisplay.tower = deck[card];
-        hand.Add( deck[card]);
+        hand.Add( cardDisplay);
         deck.RemoveAt(card);
+    }
+
+    public void UseCard(CardDisplay cardDisplay)
+    {
+        if (currentTower) return;
+        currentTower = cardDisplay.tower;
+        hand.Remove(cardDisplay);
+        deck.Add(Instantiate(currentTower));
+        cardDisplayObj = cardDisplay.gameObject;
+        cardDisplay.FollowMousePosition();
+    }
+
+    public void PlacedTower()
+    {
+        currentTower = null;
+        Destroy(cardDisplayObj);
+        cardDisplayObj = null;
+
     }
 }

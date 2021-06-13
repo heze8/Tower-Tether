@@ -11,7 +11,7 @@ public class InputController : MonoBehaviour
     private Plane plane;
     private Camera mainCam;
     private Vector3 worldPoint;
-    public Tower tileBase;
+
     private void Start()
     {
         plane = new Plane(Vector3.forward, 0);
@@ -30,6 +30,7 @@ public class InputController : MonoBehaviour
     {
         if (Input.GetMouseButton(0) && !IsPointerOverUIElement())
         {
+            if (!DeckSystem.Instance.currentTower) return;
              float distance;
              var ray = mainCam.ScreenPointToRay(Input.mousePosition);
                  
@@ -39,7 +40,10 @@ public class InputController : MonoBehaviour
              }
          // get the collision point of the ray with the z = 0 plane
             worldPoint = ray.GetPoint(-ray.origin.z / ray.direction.z);
-            GridManager.Instance.SetBuilding(worldPoint, tileBase);
+
+            GridManager.Instance.SetBuilding(worldPoint, DeckSystem.Instance.currentTower);
+            DeckSystem.Instance.PlacedTower();
+
         }
     }
 }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 760bf10f14064155a90b7f79d279cac2, type: 3}
   m_Name: IceTower
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -2095675807527736861, guid: 51334ee32ccbb36409293f3cc68fb66e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

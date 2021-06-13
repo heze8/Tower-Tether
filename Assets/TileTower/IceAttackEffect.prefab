@@ -83,8 +83,8 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
-        value: 0.3623848
+        time: 0.0028419495
+        value: 0.3495674
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -92,8 +92,35 @@ LineRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1
-        value: 0
+        time: 0.19886224
+        value: 0.74030226
+        inSlope: -0.0030651086
+        outSlope: -0.0030651086
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.48533943
+        value: 0.16209355
+        inSlope: -0.7047293
+        outSlope: -0.7047293
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.6508945
+        value: 0.7521218
+        inSlope: 0.3859238
+        outSlope: 0.3859238
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.9914856
+        value: 0.3461609
         inSlope: 0
         outSlope: 0
         tangentMode: 0

@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
 
 public class InputController : MonoBehaviour
@@ -15,11 +17,18 @@ public class InputController : MonoBehaviour
         plane = new Plane(Vector3.forward, 0);
         mainCam = Camera.main;
     }
-
+    public static bool IsPointerOverUIElement()
+    {
+        var eventData = new PointerEventData(EventSystem.current);
+        eventData.position = Input.mousePosition;
+        var results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventData, results);
+        return results.Where(r => r.gameObject.layer == 5).Count() > 0;
+    }
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && !IsPointerOverUIElement())
         {
              float distance;
              var ray = mainCam.ScreenPointToRay(Input.mousePosition);

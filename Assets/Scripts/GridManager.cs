@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -7,7 +8,8 @@ public class GridManager : Singleton<GridManager>
 {
     private Tilemap _tileMap;
 
-    public TileBase[] _tileBases;
+    public Wall _wall;
+    public List<Tower> _Towers;
 
     public List<Tower> towers;
     
@@ -28,11 +30,54 @@ public class GridManager : Singleton<GridManager>
         // positions[3] = cellPos.AddVector(new Vector2Int(1, 1));
         //
         // _tileMap.SetTiles(positions, _tileBases);
+        var existingTile =_tileMap.GetTile<TileBase>(cellPos);
+        if (existingTile is IObstacle)
+        {
+            return;
+        }
+
+        Tower instantiate = Instantiate(tile);
         
-        _tileMap.SetTile(cellPos, tile);
-        var tower = _tileMap.GetTile<Tower>(cellPos);
-        tower.pos = new Vector2(cellPos.x, cellPos.y);
+        _tileMap.SetTile(cellPos, instantiate);
+        var tower= _tileMap.GetTile<Tower>(cellPos);
+        var towerPos = new Vector2(cellPos.x, cellPos.y);
+        tower.pos = towerPos;
+        var min = math.INFINITY;
+        Tower closestT = null;
+        foreach (Tower t in towers)
+        {
+            var sqrMagnitude = (t.pos - towerPos).sqrMagnitude;
+            if (sqrMagnitude < min)
+            {
+                min = sqrMagnitude;
+                closestT = t;
+            }
+        }
+
+        if (closestT)
+        {
+            var destination = new Vector2Int(Mathf.RoundToInt(closestT.pos.x), Mathf.RoundToInt(closestT.pos.y));
+            var direction = (closestT.pos - towerPos).normalized;
+
+            Vector2Int v = new Vector2Int(Mathf.RoundToInt(towerPos.x), Mathf.RoundToInt(towerPos.y));
+            int i = 0;
+            while (true)
+            {
+                i++;
+                var route = direction * i;
+                var end = v + new Vector2Int(Mathf.RoundToInt(route.x), Mathf.RoundToInt(route.y));
+                if (end == destination)
+                {
+                    break;
+                }
+                _tileMap.SetTile(new Vector3Int(end.x, end.y,0), _wall);
+
+            }
+            
+        }
         towers.Add(tower);
+        tower.Start();
+
     }
     
 
@@ -42,7 +87,7 @@ public class GridManager : Singleton<GridManager>
     {
         foreach (var t in towers)
         {
-            t.Update();
+           // t.Update();
         }
     }
 }

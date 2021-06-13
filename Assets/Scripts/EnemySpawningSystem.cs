@@ -1,14 +1,20 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEditor.Build.Content;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class EnemySpawningSystem : Singleton<EnemySpawningSystem>
 {
     public GameObject enemyPrefab;
+
+    public HashSet<EnemyBlob> blobsSpawned;
     // Start is called before the first frame update
     void Start()
     {
+        blobsSpawned = new HashSet<EnemyBlob>();
         StartCoroutine(CoroutineUpdate(0));
     }
 
@@ -24,5 +30,22 @@ public class EnemySpawningSystem : Singleton<EnemySpawningSystem>
         yield return new WaitForSeconds(time);
         Instantiate(enemyPrefab, position: enemyPos, Quaternion.identity, transform);
         StartCoroutine(CoroutineUpdate(Random.value * 10f));
+    }
+
+    public EnemyBlob GetNearestEnemy(Vector2 pos)
+    {
+        EnemyBlob closest = null;
+        float min = math.INFINITY;
+        foreach (var blob in blobsSpawned)
+        {
+            var f = ((Vector2) blob.transform.position - pos).sqrMagnitude;
+            if (f < min)
+            {
+                min = f;
+                closest = blob;
+            }
+        }
+
+        return closest;
     }
 }

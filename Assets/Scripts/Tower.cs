@@ -40,7 +40,7 @@ public class Tower : Tile, IObstacle
     public virtual void Attack(EnemyBlob blob)
     {
         var effect =Instantiate(attackEffect, position: pos, Quaternion.identity);
-        effect.GetComponent<LineRenderer>().SetPositions(new Vector3[]{pos, blob.transform.position});
+        effect.GetComponent<LineRenderer>().SetPositions(new Vector3[]{pos + new Vector2(0.5f, 0.5f), blob.transform.position});
         blob.hp -= dmg;
     }
 

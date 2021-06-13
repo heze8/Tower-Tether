@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Ice Tower
-  m_EditorClassIdentifier: Assembly-CSharp::IceTower
+  m_Script: {fileID: 11500000, guid: 760bf10f14064155a90b7f79d279cac2, type: 3}
+  m_Name: IceTower
+  m_EditorClassIdentifier: 
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
@@ -31,17 +31,18 @@ MonoBehaviour:
     e31: 0
     e32: 0
     e33: 1
-  m_InstancedGameObject: {fileID: 0}
+  m_InstancedGameObject: {fileID: 1769443459623716875, guid: 9a1a02a73d9abba42a3a114bf99325e6, type: 3}
   m_Flags: 1
   m_ColliderType: 1
   connected: 0
   pos: {x: 0, y: 0}
-  attackInterval: 0
-  level: 0
-  attackEffect: {fileID: 0}
-  dmg: 0
-  health: 0
-  description: 
-  cardName: 
-  cost: 0
-  range: 0
+  attackInterval: 0.5
+  level: 1
+  attackEffect: {fileID: 3519457865320196500, guid: 20a66412dc419754482a86d06df451d0, type: 3}
+  dmg: 1
+  health: 8
+  description: Slows enemy, but has low damage
+  cardName: Ice Tower
+  cost: 1
+  range: 7
+  slowTime: 1

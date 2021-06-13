@@ -57,6 +57,7 @@ MonoBehaviour:
   nameText: {fileID: 7910293207478152991}
   descriptionText: {fileID: 7910293206404032863}
   cost: {fileID: 7910293207317338391}
+  sprite: {fileID: 7910293207435867980}
 --- !u!1 &7910293206404032861
 GameObject:
   m_ObjectHideFlags: 0

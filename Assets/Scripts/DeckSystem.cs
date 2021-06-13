@@ -2,13 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class DeckSystem : MonoBehaviour
 {
     public GameObject CardPrefab;
     public GameObject Hand;
-
+    public Text deckSize;
     public List<Tower> availableTowers;
     public List<Vector2Int> defineDeck;
     [HideInInspector]
@@ -20,6 +21,11 @@ public class DeckSystem : MonoBehaviour
     {
         DrawCardFromDeck();
        
+    }
+
+    public void Update()
+    {
+        deckSize.text = deck.Count.ToString();
     }
 
     public void Start()

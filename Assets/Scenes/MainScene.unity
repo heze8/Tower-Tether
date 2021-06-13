@@ -383,8 +383,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8eb30a0537138b40835e6d8f1860081, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Card1: {fileID: 7910293205536951154, guid: 98633136bed7cb74ab4ef52900daece5, type: 3}
+  CardPrefab: {fileID: 0}
   Hand: {fileID: 1502999459}
+  availableTowers: []
+  defineDeck: []
+  deck: []
+  hand: []
 --- !u!222 &329988161
 CanvasRenderer:
   m_ObjectHideFlags: 0
